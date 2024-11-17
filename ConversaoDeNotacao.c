@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef struct Node {
-    int data;
+    char data; // Alterado para char
     struct Node* next;
 } Node;
 
-typedef struct opstack {
+typedef struct opstack {   // Pilha de operadores
     Node* top;
 } opstack;
 
-opstack* createStack() {
+opstack* createStack() {    // Cria uma pilha vazia
     opstack* stack = (opstack*)malloc(sizeof(opstack));
     if (!stack) {
         printf("Erro na alocação de memória!\n");
@@ -19,12 +20,12 @@ opstack* createStack() {
     stack->top = NULL;
     return stack;
 }
-
-int isEmpty(opstack* stack) {
-    return stack->top == NULL;
+ 
+int isEmpty(opstack* stack) {       // Verifica se a pilha está vazia
+    return stack->top == NULL;   
 }
 
-void push(opstack* stack, int value) {
+void push(opstack* stack, char value) {   // Insere elemento no topo
     Node* newNode = (Node*)malloc(sizeof(Node));
     if (!newNode) {
         printf("Erro na alocação de memória!\n");
@@ -33,54 +34,78 @@ void push(opstack* stack, int value) {
     newNode->data = value;
     newNode->next = stack->top;
     stack->top = newNode;
-    printf("Elemento %d inserido com sucesso.\n", value);
 }
 
-int pop(opstack* stack) {
+char pop(opstack* stack) {  // Remove e retorna o elemento do topo
     if (isEmpty(stack)) {
         printf("Pilha vazia! Não é possível remover elementos.\n");
-        return -1;
+        return '\0';
     }
     Node* temp = stack->top;
-    int poppedValue = temp->data;
+    char poppedValue = temp->data;
     stack->top = stack->top->next;
     free(temp);
     return poppedValue;
 }
 
-void display(opstack* stack) {  //Exibe os elementos da pilha
-    if (isEmpty(stack)) {
-        printf("A pilha está vazia.\n");
-        return;
-    }
-    printf("\n Elementos na pilha: ");
-    Node* current = stack->top;
-    while (current) {
-        printf("%d ", current->data);
-        current = current->next;
-    }
-    printf("\n");
-}
-
-void freeStack(opstack* stack) {   //Libera a memória alocada para a pilha
+void freeStack(opstack* stack) {  // Libera memória alocada para a pilha
     while (!isEmpty(stack)) {
-        pop(stack); // Remove cada elemento
+        pop(stack);
     }
-    free(stack); // Libera a estrutura da pilha
+    free(stack);
 }
 
-int main() {        //Teste da pilha
+int isOperator(char ch) {    // Verifica se é operador
+    return (ch == '+' || ch == '-' || ch == '*' || ch == '/');
+}
+
+int precedence(char op) {    // Retorna a precedência do operador
+    if (op == '+' || op == '-') return 1;
+    if (op == '*' || op == '/') return 2;
+    return 0;
+}
+
+char* convertToPostfix(char* infix) {   // Converte expressão infixa para pós-fixa
     opstack* stack = createStack();
+    char* postfix = (char*)malloc(100 * sizeof(char)); // Saída
+    int k = 0; // Índice para postfix
 
-    push(stack, 10);
-    push(stack, 20);
-    push(stack, 30);
+    for (int i = 0; infix[i] != '\0'; i++) {
+        char ch = infix[i];
 
-    display(stack);
+        if (isalnum(ch)) { // Se for operando (letra ou número)
+            postfix[k++] = ch;
+        } else if (ch == '(') {
+            push(stack, ch);
+        } else if (ch == ')') {
+            while (!isEmpty(stack) && stack->top->data != '(') {
+                postfix[k++] = pop(stack);
+            }
+            pop(stack); // Remove '('
+        } else if (isOperator(ch)) {
+            while (!isEmpty(stack) && precedence(stack->top->data) >= precedence(ch)) {
+                postfix[k++] = pop(stack);
+            }
+            push(stack, ch);
+        }
+    }
 
-    printf("Elemento removido: %d\n", pop(stack));
-    display(stack);
+    while (!isEmpty(stack)) { // Adiciona operadores restantes
+        postfix[k++] = pop(stack);
+    }
 
+    postfix[k] = '\0'; // Finaliza string
     freeStack(stack);
+    return postfix;
+}
+
+int main() {
+    char infix[] = "A+B*(C-D)"; // Exemplo de expressão infixa
+    printf("Expressão Infixa: %s\n", infix);
+
+    char* postfix = convertToPostfix(infix);
+    printf("Expressão Pós-fixa: %s\n", postfix);
+
+    free(postfix); // Libera memória alocada para a string pós-fixa
     return 0;
 }
