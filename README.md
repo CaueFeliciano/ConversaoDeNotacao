@@ -27,6 +27,7 @@ Este projeto implementa um conversor de expressões matemáticas em linguagem C.
 # Exemplo
 
 # Entrada:
+
  A + B * C
 
 Conversão:
@@ -38,15 +39,18 @@ Conversão:
 6.  Desempilha os operadores restantes (* e depois +).
 
 # Saída:
+
  A B C * +
 
 Testes
 Exemplo 1:
+
 • Entrada: A + B
 
 • Saída: A B +
 
 Exemplo 2:
+
 • Entrada: (A + B) * C
 
 • Saída: A B + C *
