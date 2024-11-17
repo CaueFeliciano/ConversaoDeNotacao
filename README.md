@@ -43,13 +43,14 @@ Conversão:
  A B C * +
 
 Testes
-*Exemplo 1:
+
+*Exemplo 1:*
 
 • Entrada: A + B
 
 • Saída: A B +
 
-*Exemplo 2:
+*Exemplo 2:*
 
 • Entrada: (A + B) * C
 
