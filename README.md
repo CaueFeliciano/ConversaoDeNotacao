@@ -13,6 +13,7 @@ Este projeto implementa um conversor de expressões matemáticas em linguagem C.
 # Regras para Conversão
 1. Se o caractere é um operando (exemplo: A, B, 1), adiciona diretamente na saída.
 2. Se é um operador (exemplo: +, *):
+
 • Empilha se for de maior precedência ou se a pilha estiver vazia.
 
 • Caso contrário, desempilha operadores da pilha para a saída até encontrar um de menor precedência.
