@@ -23,12 +23,12 @@ Este projeto implementa um conversor de expressões matemáticas em linguagem C.
  A + B * C
 
 Conversão:
-1. #A : Vai para a saída.
-2. #+ : Empilha.
-3. #B : Vai para a saída.
-4. #* : Empilha (maior precedência que +).
-5. #C: Vai para a saída.
-6. #Desempilha os operadores restantes (* e depois +).
+1. A : Vai para a saída.
+2. + : Empilha.
+3. B : Vai para a saída.
+4. * : Empilha (maior precedência que +).
+5. C: Vai para a saída.
+6. Desempilha os operadores restantes (* e depois +).
 
 # Saída:
  A B C * +
@@ -36,9 +36,11 @@ Conversão:
 Testes
 Exemplo 1:
 • Entrada: A + B
+
 • Saída: A B +
 Exemplo 2:
 • Entrada: (A + B) * C
+
 • Saída: A B + C *
 
 # Conclusão
