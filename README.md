@@ -16,11 +16,11 @@ Este projeto implementa um conversor de expressões matemáticas em linguagem C.
 • Empilha se for de maior precedência ou se a pilha estiver vazia.
 
 • Caso contrário, desempilha operadores da pilha para a saída até encontrar um de menor precedência.
-4. Se for um parêntese de abertura ((), empilha.
+3. Se for um parêntese de abertura (), empilha.
 
-5. Se for um parêntese de fechamento ()), desempilha até encontrar o parêntese de abertura correspondente.
+4. Se for um parêntese de fechamento (), desempilha até encontrar o parêntese de abertura correspondente.
    
-6. No final, desempilha todos os operadores restantes para a saída.
+5. No final, desempilha todos os operadores restantes para a saída.
 
 # Exemplo
 
@@ -43,6 +43,7 @@ Exemplo 1:
 • Entrada: A + B
 
 • Saída: A B +
+
 Exemplo 2:
 • Entrada: (A + B) * C
 
