@@ -47,3 +47,40 @@ int pop(opstack* stack) {
     free(temp);
     return poppedValue;
 }
+
+void display(opstack* stack) {  //Exibe os elementos da pilha
+    if (isEmpty(stack)) {
+        printf("A pilha está vazia.\n");
+        return;
+    }
+    printf("\n Elementos na pilha: ");
+    Node* current = stack->top;
+    while (current) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+void freeStack(opstack* stack) {   //Libera a memória alocada para a pilha
+    while (!isEmpty(stack)) {
+        pop(stack); // Remove cada elemento
+    }
+    free(stack); // Libera a estrutura da pilha
+}
+
+int main() {        //Teste da pilha
+    opstack* stack = createStack();
+
+    push(stack, 10);
+    push(stack, 20);
+    push(stack, 30);
+
+    display(stack);
+
+    printf("Elemento removido: %d\n", pop(stack));
+    display(stack);
+
+    freeStack(stack);
+    return 0;
+}
