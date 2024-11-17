@@ -54,7 +54,10 @@ Exemplo 2:
 # Conclusão
 Este projeto demonstra como a estrutura de dados pilha pode ser utilizada para manipular expressões matemáticas complexas, facilitando a conversão para notações computacionalmente mais eficientes. A implementação em C exemplifica conceitos de precedência de operadores, uso de memória dinâmica e organização algorítmica.
 
-*Possíveis Expansões
+# Possíveis Expansões
+
 • Suporte para múltiplas variáveis e valores numéricos.
+
 • Implementação da conversão para notação prefixa.
+
 • Manipulação de erros para entradas inválidas.
