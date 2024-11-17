@@ -16,6 +16,7 @@ Este projeto implementa um conversor de expressões matemáticas em linguagem C.
 • Empilha se for de maior precedência ou se a pilha estiver vazia.
 
 • Caso contrário, desempilha operadores da pilha para a saída até encontrar um de menor precedência.
+
 3. Se for um parêntese de abertura (), empilha.
 
 4. Se for um parêntese de fechamento (), desempilha até encontrar o parêntese de abertura correspondente.
